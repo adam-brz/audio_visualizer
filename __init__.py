@@ -8,6 +8,7 @@ bl_info = {
     "description": "Generates audio visualization in form of animated cubes for given input file.",
     "blender": (2, 80, 0),
     "version": (1, 0),
+    "author": "Andrew2a1",
     "support": "COMMUNITY",
     "category": "Animation",
 }
