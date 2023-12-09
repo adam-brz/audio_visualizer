@@ -1,6 +1,6 @@
 import bpy
 
-from .visualizer_generator import VisualizerGenerator
+from .visualizer_generator import VisualizerGenerator, VisualizerSettings
 from .audio_processor import ProcessingSettings
 
 bl_info = {
@@ -28,13 +28,37 @@ class AudioVisProperties(bpy.types.PropertyGroup):
         name="Max Frequency [Hz]", default=16000, min=1, max=20000
     )
     sampling_duration_ms: bpy.props.FloatProperty(
-        name="Sampling duration [ms]", default=100, min=1e-6, max=1e6
+        name="Sampling duration [ms]",
+        description="Duration of sampling time for single step (the less duration, the faster changes can be visualized).",
+        default=100,
+        min=1e-6,
+        max=1e6,
     )
     use_log_y: bpy.props.BoolProperty(
-        name="Logarithmic Scale", default=True
+        name="Logarithmic Scale",
+        description="Use logarithmic scale for frequency band height.",
+        default=True,
     )
     scaling_factor: bpy.props.FloatProperty(
-        name="Scaling Factor", default=15
+        name="Scaling Factor",
+        description="Multiplier for frequency band height.",
+        default=15,
+    )
+    freq_band_spacing: bpy.props.FloatProperty(
+        name="Frequency Bands Spacing",
+        default=1,
+        description="Amount of space between frequency bands.",
+    )
+    two_sided: bpy.props.BoolProperty(
+        name="Two Sided Visualizer",
+        description="Scale frequency band in both directions.",
+        default=False,
+    )
+    freq_band_scale_xy: bpy.props.FloatVectorProperty(
+        name="Frequency Band Scale",
+        description="X and Y scale of frequency band.",
+        default=(1.0, 1.0),
+        size=2,
     )
 
 
@@ -50,11 +74,14 @@ class AudioVisLayout:
         col.prop(props, "max_frequency")
         col.prop(props, "frequency_band_count")
         col.prop(props, "sampling_duration_ms")
+        col.prop(props, "use_log_y")
 
         col.label(text="Output Options")
         col.prop(props, "collection_name")
+        col.prop(props, "freq_band_spacing")
+        col.prop(props, "freq_band_scale_xy")
         col.prop(props, "scaling_factor")
-        col.prop(props, "use_log_y")
+        col.prop(props, "two_sided")
 
 
 class AudioVisPropertiesPanelBase(bpy.types.Panel):
@@ -95,7 +122,18 @@ class OBJECT_OT_AudioVis(AudioVisLayout, bpy.types.Operator):
                 props.use_log_y,
             )
         )
-        self.vis_generator.generate_visualizer(context, props.collection_name, props.scaling_factor)
+        self.vis_generator.generate_visualizer(
+            context,
+            props.collection_name,
+            VisualizerSettings(
+                props.freq_band_spacing,
+                props.freq_band_scale_xy[0],
+                props.freq_band_scale_xy[1],
+                props.scaling_factor,
+                props.two_sided,
+            ),
+        )
+
         return {"FINISHED"}
 
 
