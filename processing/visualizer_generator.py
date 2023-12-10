@@ -92,14 +92,14 @@ class VisualizerGenerator:
         freq_band_number: int,
         freq_band_visualizer: Any,
     ):
-        for j in range(scaled_visualization_data.shape[0]):
+        for animation_step in range(scaled_visualization_data.shape[0]):
             freq_band_visualizer.scale = (
                 1,
                 1,
-                scaled_visualization_data[j, freq_band_number],
+                scaled_visualization_data[animation_step, freq_band_number],
             )
             freq_band_visualizer.keyframe_insert(
-                data_path="scale", index=2, frame=(j * keyframe_offset + 1)
+                data_path="scale", index=2, frame=(animation_step * keyframe_offset + 1)
             )
 
     def _create_visualizer_collection(self, collection_name: str):

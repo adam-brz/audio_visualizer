@@ -1,17 +1,18 @@
-import os
-
 import aud
+import os
 import numpy as np
+
+from typing import Any, Optional
 
 
 class AudioData:
     def __init__(self):
-        self._audio_path = ""
-        self._audio_file_modification_time = None
-        self._cached_audio = None
-        self._cached_data = None
+        self._audio_path: str = ""
+        self._audio_file_modification_time: Optional[float] = None
+        self._cached_audio: Any = None
+        self._cached_data: Any = None
 
-    def load(self, audio_path):
+    def load(self, audio_path: str):
         modification_time = os.path.getmtime(audio_path)
 
         if (
@@ -29,8 +30,8 @@ class AudioData:
         if channels > 1:
             self._cached_data = np.average(self._cached_data, axis=1)
 
-    def data(self):
+    def data(self) -> Any:
         return self._cached_data
 
-    def freq(self):
+    def freq(self) -> int:
         return self._cached_audio.specs[0]
