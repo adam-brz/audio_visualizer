@@ -3,7 +3,7 @@ import bpy
 
 class AudioVisProperties(bpy.types.PropertyGroup):
     audio_filepath: bpy.props.StringProperty(
-        name="Audio Filepath",
+        name="Audio File Path",
         description="Path to audio file to process",
         subtype="FILE_PATH",
     )
@@ -21,14 +21,14 @@ class AudioVisProperties(bpy.types.PropertyGroup):
     )
     min_frequency: bpy.props.IntProperty(
         name="Min Frequency [Hz]",
-        description="Minimum frequency of signal to process",
+        description="Minimum frequency of signal to visualize",
         default=60,
         min=1,
         max=20000,
     )
     max_frequency: bpy.props.IntProperty(
         name="Max Frequency [Hz]",
-        description="Maximum frequency of signal to process",
+        description="Maximum frequency of signal to visualize",
         default=16000,
         min=1,
         max=20000,

@@ -9,13 +9,15 @@ from .layout.audio_vis_properties import AudioVisProperties
 import bpy
 
 bl_info = {
-    "name": "Audio Visualizer",
+    "name": "AudioVis",
     "description": "Generate audio frequency spectrum visualization in the form of animation data.",
-    "blender": (2, 80, 0),
+    "blender": (3, 1, 0),
     "version": (1, 0),
     "author": "Andrew2a1",
     "support": "COMMUNITY",
     "category": "Animation",
+    "location": "Properties > Tool > Audio Visualizer",
+    # "tracker_url": "",
 }
 
 classes = (
