@@ -17,7 +17,7 @@ bl_info = {
     "support": "COMMUNITY",
     "category": "Animation",
     "location": "Properties > Tool > Audio Visualizer",
-    # "tracker_url": "",
+    "tracker_url": "https://github.com/Andrew2a1/audio_visualizer/issues",
 }
 
 classes = (
