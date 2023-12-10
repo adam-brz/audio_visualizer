@@ -1,10 +1,10 @@
-# AudioVis
+ # AudioVis
 
 Generate animated audio visualization from input file in Blender.
 
 ## Installation
 
-To install the add-on, download the audiovis-x-y.zip file attached to the latest release and install it as a regular blender add-on (User Preferences -> Addons -> Install from file).
+To install the add-on, download the audiovis-x-y.zip file attached to the [latest](https://github.com/Andrew2a1/audio_visualizer/releases/latest) release and install it as a regular blender add-on (User Preferences -> Addons -> Install from file).
 
 ## Generating Visualization
 
